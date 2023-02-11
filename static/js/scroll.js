@@ -1,6 +1,15 @@
 (function () {
 
     const newjobEl = document.getElementById("newjobs")
+    const loaderEl = document.getElementById("loader")
+
+    const hideLoader = () => {
+        loaderEl.classList.remove('show');
+    };
+    
+    const showLoader = () => {
+        loaderEl.classList.add('show');
+    };
 
     // get the quotes from API
     const getJobs = async () => {
@@ -21,6 +30,9 @@
 
     // load new jobs
     const loadJobs = async () => {
+
+        showLoader();
+
         // 0.1 second later
         setTimeout(async () => {
             try {
@@ -29,9 +41,12 @@
                 showJobs(response);
             } catch (error) {
                 console.log(error.message);
-            } 
+            }
+            finally{
+                hideLoader();
+            }
 
-        }, 100);
+        }, 500);
 
     };
 

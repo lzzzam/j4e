@@ -430,6 +430,11 @@
   flex: 0 auto;
 }
 
+.loader {
+    text-align: center;
+    padding: 5px;
+}
+
 .emailcontainer {
   display: -webkit-box;
   display: -webkit-flex;
