@@ -31,6 +31,15 @@ def index():
     context = {"jobs" : jobs, "showEmailBox" : showEmailBox}
     return render_template('index.html.j2', context=context)
 
+counter = 0
+
+@app.route('/getjobs')
+def getJobs():
+    global counter
+    jobs = [{"title" : f"Job#{counter}", "company" : f"company#{counter}", "place" : f"place#{counter}"}]
+    counter = counter + 1
+    context = {"jobs" : jobs}
+    return render_template('jobs.html.j2', context=context)
 
 @app.route('/form', methods=('GET', 'POST'))
 def form():
@@ -47,5 +56,5 @@ def close_form():
     return resp
     
 
-with app.test_request_context():
-    print(url_for('index'))
+# with app.test_request_context():
+#     print(url_for('index'))
