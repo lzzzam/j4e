@@ -10,7 +10,7 @@ if(close_form)
     });    
 }
 
-if(close_form)
+if(email_form)
 {
     email_form.addEventListener('submit', (event) => {
         thank_message.style.display = 'block'
