@@ -1,4 +1,5 @@
 venv/**
 instance/**
+static/images/**
 tool/**
 *.cpython-38.pyc
