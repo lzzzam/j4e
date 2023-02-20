@@ -32,10 +32,27 @@
         </div>
         <div class="headercontainer w-container">
             <h1 class="headertitle">Find The Best <br>Embedded System Jobs<br>In Europe</h1>
+            <form action="/search" class="searchbar w-form"><input type="search" class="searchbarinput w-input"
+                    maxlength="256" name="query" placeholder="Search…" id="search-2" required=""><input type="submit"
+                    value="Search" class="button w-button"></form>
         </div>
     </div>
     <!-- Use extention feature from Jinja2 -->
-    {% block body %}{% endblock body %}
+    <div class="wf-section">
+        <div class="container w-container">
+            <div class="jobboardreference">
+                <div class="text-block">Best jobs aggregated from </div><img
+                    src="{{ url_for('static', filename='images/IndeedLogo.svg') }}" loading="lazy" width="150" alt=""
+                    class="jobboardlogo"><img src="{{ url_for('static', filename='images/LinkedInLogo.svg') }}"
+                    loading="lazy" width="145.5" alt="" class="jobboardlogo"><img
+                    src="{{ url_for('static', filename='images/zipRecruiterLogo.svg') }}" loading="lazy" width="219"
+                    alt="" class="jobboardlogo">
+            </div>
+
+            <!-- job board cards -->
+            {% block body %}{% endblock body %}
+        </div>
+    </div>
 
     {% if context.showEmailBox == True %}
     <div id="emailbox">
