@@ -1,3 +1,13 @@
+var jobTitle = "";
+var jobCity = "";
+var jobSeniority = "";
+
+function searchJob() {
+    jobTitle = document.getElementById("title")
+    jobCity = document.getElementById("city")
+    jobSeniority = document.getElementById("seniority")
+}
+
 (function () {
 
     const newjobEl = document.getElementById("newjobs")
@@ -13,7 +23,7 @@
 
     // get the quotes from API
     const getJobs = async () => {
-        const API_URL = "/getjobs";
+        const API_URL = `/jobs?title=${jobTitle.value}&city=${jobCity.value}&seniority=${jobSeniority.value}`;
         const response = await fetch(API_URL);
         // handle 404
         if (!response.ok) {

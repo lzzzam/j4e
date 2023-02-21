@@ -41,6 +41,15 @@ def getJobs():
     context = {"jobs" : jobs}
     return render_template('jobs.html.j2', context=context)
 
+@app.route('/jobs')
+def searchjobs():
+    # context = {"jobs" : jobs}
+    args = request.args
+    title = args["title"]
+    city = args["city"]
+    seniority = args["seniority"]
+    return make_response('', 204)
+
 @app.route('/form', methods=('GET', 'POST'))
 def form():
     print(request.form['email'])
