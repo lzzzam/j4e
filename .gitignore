@@ -2,4 +2,5 @@ venv/**
 instance/**
 static/images/**
 tool/**
+jobs.sql
 *.pyc

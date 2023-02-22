@@ -2,12 +2,6 @@ var jobTitle = "";
 var jobCity = "";
 var jobSeniority = "";
 
-function searchJob() {
-    jobTitle = document.getElementById("title")
-    jobCity = document.getElementById("city")
-    jobSeniority = document.getElementById("seniority")
-}
-
 (function () {
 
     const newjobEl = document.getElementById("newjobs")
@@ -16,14 +10,14 @@ function searchJob() {
     const hideLoader = () => {
         loaderEl.classList.remove('show');
     };
-    
+
     const showLoader = () => {
         loaderEl.classList.add('show');
     };
 
     // get the quotes from API
     const getJobs = async () => {
-        const API_URL = `/jobs?title=${jobTitle.value}&city=${jobCity.value}&seniority=${jobSeniority.value}`;
+        const API_URL = `/nextjobs`;
         const response = await fetch(API_URL);
         // handle 404
         if (!response.ok) {
@@ -52,11 +46,11 @@ function searchJob() {
             } catch (error) {
                 console.log(error.message);
             }
-            finally{
+            finally {
                 hideLoader();
             }
 
-        }, 500);
+        }, 300);
 
     };
 
@@ -67,8 +61,7 @@ function searchJob() {
             clientHeight
         } = document.documentElement;
 
-        if (scrollTop + clientHeight >= scrollHeight - 20) 
-        {
+        if (scrollTop + clientHeight >= scrollHeight - 10) {
             loadJobs();
         }
     }, {

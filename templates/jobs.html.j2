@@ -1,29 +1,30 @@
 {% for job in context.jobs %}
-<div class="wf-section">
-    <div class="container w-container">
-        <div class="jobcard">
-            <div class="jobcard_logo"><img src="{{ url_for('static', filename='images/city.png') }}" loading="lazy"
-                    height="60" width="60" alt="" class="image"></div>
-            <div class="jobcard_header">
-                <div class="jobcard_title">
-                    <div class="jobcardtext jobcardtitle">{{ job.title }}</div>
-                </div>
-                <div class="jobcard_company">
-                    <div class="jobcardtext">{{ job.company }}</div>
-                </div>
-                <div class="jobcard_info"><img src="{{ url_for('static', filename='images/pin.svg') }}" loading="lazy"
-                        width="20" height="20" alt="" class="mapicon">
-                    <div class="jobcardtext jobcardplace">{{ job.place }}</div>
-                    <div class="jobcardtext">🇮🇹</div>
-                </div>
+<div class="jobcard">
+    <div class="jobcard_preview">
+        <div class="jobcard_logo"><img src="/static/images/logos/{{ job.logo }}" loading="lazy" height="60" width="60"
+                alt="" class="image"></div>
+        <div class="jobcard_header">
+            <div class="jobcard_title">
+                <div class="jobcardtext jobcardtitle">{{ job.title }}</div>
             </div>
-            <div class="jobcard_footer">
-                <div class="jobcard_skills"></div>
-                <div class="jobcard_date">
-                    <div class="jobdate">__/__/_____</div>
-                </div>
+            <div class="jobcard_company">
+                <div class="jobcardtext">{{ job.company }}</div>
+            </div>
+            <div class="jobcard_info"><img src="{{ url_for('static', filename='images/pin.svg') }}" loading="lazy"
+                    width="20" height="20" alt="" class="mapicon">
+                <div class="jobcardtext jobcardplace">{{ job.place }}</div>
+                <div class="jobcardtext">🇮🇹</div>
             </div>
         </div>
+        <div class="jobcard_footer">
+            <div class="jobcard_skills"></div>
+            <div class="jobcard_date">
+                <div class="jobdate">{{ job.date }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="jobcard_expand">
+        <div class="jobcardtext">{{ job.description }}</div>
     </div>
 </div>
 {% endfor %}
