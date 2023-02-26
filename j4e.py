@@ -37,8 +37,13 @@ def index():
                                                 description like '%{g.search_text}%') \
                                             and (country like '%{g.search_country}%') \
                     limit 10")
-    context = {"jobs" : jobs, "showEmailBox" : g.showEmailBox}    
-    resp = make_response(render_template('index.html.j2', context=context))
+    if len(jobs) > 0:
+        context = {"jobs" : jobs, "showEmailBox" : g.showEmailBox, "noResult": False}    
+        resp = make_response(render_template('index.html.j2', context=context))
+    else:
+        context = {"jobs" : jobs, "showEmailBox" : g.showEmailBox, "noResult": True}    
+        resp = make_response(render_template('index.html.j2', context=context))
+
     return resp
 
 
