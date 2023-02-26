@@ -13,7 +13,8 @@ init_app(app)
 
 @app.before_request
 def readCookies():
-    if (request.cookies.get('subscribed-to-newsletter') == "1") | (request.cookies.get('hidden-subscribe-box') == "1"):
+    if (request.cookies.get('subscribed-to-newsletter') == "1") | \
+       (request.cookies.get('hidden-subscribe-box') == "1"):
         g.showEmailBox = False
     else:
         g.showEmailBox = True
@@ -30,7 +31,12 @@ def updateCookies(response):
 @app.route('/')
 def index():        
     g.search_text = request.args.get("search-text", "")
-    jobs = query_db(f"select * from jobs where title like '%{g.search_text}%' limit 10")
+    g.search_country = request.args.get("search-country", "")
+    jobs = query_db(f"select * from jobs where  (title like '%{g.search_text}%' or \
+                                                company like '%{g.search_text}%' or \
+                                                description like '%{g.search_text}%') \
+                                            and (country like '%{g.search_country}%') \
+                    limit 10")
     context = {"jobs" : jobs, "showEmailBox" : g.showEmailBox}    
     resp = make_response(render_template('index.html.j2', context=context))
     return resp
@@ -39,7 +45,10 @@ def index():
 @app.route('/nextjobs')
 def getJobs():
     g.page_offset = g.page_offset + 10 
-    jobs = query_db(f"select * from jobs where title like '%{g.search_text}%' limit 10 offset {g.page_offset}")
+    jobs = query_db(f"select * from jobs where  title like '%{g.search_text}%' or \
+                                                company like '%{g.search_text}%' or \
+                                                description like '%{g.search_text}%' \
+                    limit 10 offset {g.page_offset}")
     
     if len(jobs) != 0:
         context = {"jobs" : jobs}

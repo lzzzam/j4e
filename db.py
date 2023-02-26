@@ -7,10 +7,7 @@ import pydenticon
 
 def get_db():
     if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
-        )
+        g.db = sqlite3.connect("jobs.sql" )
         g.db.row_factory = sqlite3.Row
 
     return g.db
@@ -128,6 +125,3 @@ def create_mock_db():
     fill_db(db, data)
     for job in data:
         generate_logo(job['company'])
-
-
-create_mock_db()
