@@ -1,25 +1,3 @@
-import Typed from './typed.js';
-
-// auto type city in the header
-const newCity = new Typed('#header-city', {
-    strings: [
-        'Munich', 'Vienna', 'Paris',
-        'Warsaw', 'Berlin', 'Rome',
-        'Madrid', 'Zagreb', 'Athens',
-        'Lisbon', 'Milan'
-    ],
-    // typing-in speed. default value is one
-    typeSpeed: 1,
-    // typing-out speed. default value is one
-    backSpeed: 1,
-    // occur once or forever. default value is false
-    loop: true,
-    // color of insertion point. default value is black
-    IPColor: "white",
-});
-// Initialize Typing Effect
-newCity.start();
-
 function searchJob() {
     jobTitle = document.getElementById("title")
     jobCity = document.getElementById("city")

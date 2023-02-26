@@ -59,10 +59,11 @@ var jobSeniority = "";
 
     window.addEventListener('scroll', () => {
         const {
-            scrollTop,
             scrollHeight,
             clientHeight
         } = document.documentElement;
+
+        let scrollTop = window.scrollY;
 
         if (stopScrolling == 0) {
             if (scrollTop + clientHeight >= scrollHeight - 10) {

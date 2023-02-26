@@ -1,12 +1,10 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Mon Feb 06 2023 22:00:38 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="63dbc3a2812938549876f48d" data-wf-site="63dbc3a281293806c776f48c">
+<html>
 
 <head>
-    <meta charset="utf-8">
     <title>j4e</title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta content="Webflow" name="generator">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -19,9 +17,8 @@
     <div class="headersection wf-section">
         <div class="navbarcontainer w-container">
             <a href="/" aria-current="page" class="navbarname brandname clickable">Jobs4Embedded</a>
-            <!-- <a href="" aria-current="page" class="navbarname pagename">Resources</a> -->
             <a href="" aria-current="page" class="navbarname pagename clickable">About</a>
-            <a href="#" class="button w-button">POST A JOB</a>
+            <a href="#" class="button">POST A JOB</a>
         </div>
         <div class="headercontainer w-container">
             <h1 class="headertitle clickable">
@@ -30,7 +27,7 @@
                 in <span id="header-city">Europe</span>
             </h1>
             <div class="searchdiv">
-                <form action="{{ url_for('index') }}" class="searchbar w-form">
+                <form action="{{ url_for('index') }}" class="searchbar">
                     <div class="searchbardiv">
                         <input id="search-text" type="text" name="search-text" class="searchbarinput w-input"
                             placeholder="search...">
@@ -61,27 +58,26 @@
                             </optgroup>
                         </select>
                     </div>
-                    <button type="submit" class="button w-button searchbutton">SEARCH</button>
+                    <button type="submit" class="button searchbutton">SEARCH</button>
                 </form>
             </div>
         </div>
     </div>
-    <!-- Use extention feature from Jinja2 -->
     <div id="job-list" class="wf-section">
         <div class="container w-container">
-            <div class="jobboardreference">
-                <div class="text-block">Best jobs aggregated from </div>
-                <img src="{{ url_for('static', filename='images/LinkedInLogo.svg') }}" loading="lazy" width="120"
-                    class="jobboardlogo clickable">
-                <img src="{{ url_for('static', filename='images/IndeedLogo.svg') }}" loading="lazy" width="110"
-                    class="jobboardlogo clickable">
-                <img src="{{ url_for('static', filename='images/zipRecruiterLogo.svg') }}" loading="lazy" width="180"
-                    class="jobboardlogo clickable">
+            <div class="jobboard-ref">
+                <div class="jobboard-ref-text">Best jobs aggregated from </div>
+                <div class="jobboard-ref-logo-div">
+                    <img src="{{ url_for('static', filename='images/LinkedInLogo.svg') }}" loading="lazy" width="120"
+                        class="jobboard-ref-logo clickable">
+                    <img src="{{ url_for('static', filename='images/IndeedLogo.svg') }}" loading="lazy" width="110"
+                        class="jobboard-ref-logo clickable">
+                    <img src="{{ url_for('static', filename='images/zipRecruiterLogo.svg') }}" loading="lazy"
+                        width="180" class="jobboard-ref-logo clickable">
+                </div>
             </div>
 
-            <!-- job board cards -->
             {% block body %}{% endblock body %}
-            <!-- new job after scrolling -->
             <div id="newjobs"></div>
         </div>
     </div>
@@ -112,18 +108,29 @@
                     <img id='close_form' src="{{ url_for('static', filename='images/cross.svg') }}" loading="lazy"
                         width="20" height="20" alt="" class="emailcross">
                 </a>
-                <!-- </div> -->
             </div>
         </div>
         {% endif %}
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="{{ url_for('static', filename='js/webflow.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='js/index.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='js/scroll.js') }}" type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='js/typed.js') }}" type="module"></script>
     <script src=" {{ url_for('static', filename='js/search.js' ) }}" type="module"></script>
+    <script>
+        var typed = new Typed("#header-city", {
+            strings: [
+                'Munich^1500', 'Vienna^1500', 'Paris^1500',
+                'Warsaw^1500', 'Berlin^1500', 'Rome^1500',
+                'Madrid^1500', 'Zagreb^1500', 'Athens^1500',
+                'Lisbon^1500', 'Milan^1500'
+            ],
+            typeSpeed: 200,
+            backSpeed: 100,
+            loop: true
+        })
+    </script>
 </body>
 
 </html>
