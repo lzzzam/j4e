@@ -6,13 +6,14 @@ var jobSeniority = "";
 
     const newjobEl = document.getElementById("newjobs")
     const loaderEl = document.getElementById("loader")
+    let stopScrolling = 0
 
     const hideLoader = () => {
-        loaderEl.classList.remove('show');
+        loaderEl.style.display = "none";
     };
 
     const showLoader = () => {
-        loaderEl.classList.add('show');
+        loaderEl.style.display = "block";
     };
 
     // get the quotes from API
@@ -22,6 +23,9 @@ var jobSeniority = "";
         // handle 404
         if (!response.ok) {
             throw new Error(`An error occurred: ${response.status}`);
+        }
+        else if (response.status == 204) {
+            stopScrolling = 1;
         }
         return await response.text();
     }
@@ -51,7 +55,6 @@ var jobSeniority = "";
             }
 
         }, 300);
-
     };
 
     window.addEventListener('scroll', () => {
@@ -61,8 +64,10 @@ var jobSeniority = "";
             clientHeight
         } = document.documentElement;
 
-        if (scrollTop + clientHeight >= scrollHeight - 10) {
-            loadJobs();
+        if (stopScrolling == 0) {
+            if (scrollTop + clientHeight >= scrollHeight - 10) {
+                loadJobs();
+            }
         }
     }, {
         passive: true

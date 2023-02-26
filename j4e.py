@@ -1,69 +1,63 @@
 import os
-import db
+from db import init_app, get_db, close_db, query_db
 from flask import Flask
 from flask import Blueprint, request, flash, g, redirect, render_template, request, session, url_for, make_response
-
-jobs = [{"title" : "Job#1", "company" : "company#1", "place" : "place#1"},
-        {"title" : "Job#2", "company" : "company#2", "place" : "place#2"},
-        {"title" : "Job#3", "company" : "company#3", "place" : "place#3"},
-        {"title" : "Job#2", "company" : "company#2", "place" : "place#2"},
-        {"title" : "Job#2", "company" : "company#2", "place" : "place#2"},
-        {"title" : "Job#2", "company" : "company#2", "place" : "place#2"},
-        {"title" : "Job#2", "company" : "company#2", "place" : "place#2"},
-        {"title" : "Job#2", "company" : "company#2", "place" : "place#2"},
-        {"title" : "Job#2", "company" : "company#2", "place" : "place#2"}]
 
 # create and configure the app
 app = Flask(__name__)
 app.config.from_mapping(
-    DATABASE=os.path.join(app.instance_path, "jobs.sqlite"),
+    DATABASE="jobs.sql",
 )
 
-db.init_app(app)
+init_app(app)
+
+@app.before_request
+def readCookies():
+    if (request.cookies.get('subscribed-to-newsletter') == "1") | (request.cookies.get('hidden-subscribe-box') == "1"):
+        g.showEmailBox = False
+    else:
+        g.showEmailBox = True
+    
+    g.search_text = request.cookies.get('search-text', "")
+    g.page_offset = int(request.cookies.get('page-offset', "0"))
+
+@app.after_request
+def updateCookies(response):
+    response.set_cookie(key='page-offset', value = str(g.page_offset), max_age=60)
+    response.set_cookie(key='search-text', value = g.search_text, max_age=60)
+    return response
 
 @app.route('/')
-def index():
-    if (request.cookies.get('subscribed-to-newsletter') == "1") | (request.cookies.get('hidden-subscribe-box') == "1"):
-        showEmailBox = False
-    else:
-        showEmailBox = True
-        
-    context = {"jobs" : jobs, "showEmailBox" : showEmailBox}
-    return render_template('index.html.j2', context=context)
+def index():        
+    g.search_text = request.args.get("search-text", "")
+    jobs = query_db(f"select * from jobs where title like '%{g.search_text}%' limit 10")
+    context = {"jobs" : jobs, "showEmailBox" : g.showEmailBox}    
+    resp = make_response(render_template('index.html.j2', context=context))
+    return resp
 
-counter = 0
 
-@app.route('/getjobs')
+@app.route('/nextjobs')
 def getJobs():
-    global counter
-    jobs = [{"title" : f"Job#{counter}", "company" : f"company#{counter}", "place" : f"place#{counter}"}]
-    counter = counter + 1
-    context = {"jobs" : jobs}
-    return render_template('jobs.html.j2', context=context)
+    g.page_offset = g.page_offset + 10 
+    jobs = query_db(f"select * from jobs where title like '%{g.search_text}%' limit 10 offset {g.page_offset}")
+    
+    if len(jobs) != 0:
+        context = {"jobs" : jobs}
+        resp = make_response(render_template('jobs.html.j2', context=context))
+    else:
+        resp = make_response('', 204)
+        
+    return resp
 
-@app.route('/jobs')
-def searchjobs():
-    # context = {"jobs" : jobs}
-    args = request.args
-    title = args["title"]
-    city = args["city"]
-    seniority = args["seniority"]
-    return make_response('', 204)
 
 @app.route('/form', methods=('GET', 'POST'))
 def form():
-    print(request.form['email'])
     resp = make_response('', 204)
     resp.set_cookie(key='subscribed-to-newsletter', value = "1")
     return resp
 
 @app.route('/close_form')
 def close_form():
-    print('close form')
     resp = make_response('', 204)
     resp.set_cookie(key='hidden-subscribe-box', value = "1", max_age=60)
     return resp
-    
-
-# with app.test_request_context():
-#     print(url_for('index'))

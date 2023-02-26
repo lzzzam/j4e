@@ -7,13 +7,11 @@
     <title>j4e</title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="Webflow" name="generator">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     <link href="{{ url_for('static', filename='css/normalize.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ url_for('static', filename='css/webflow.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ url_for('static', filename='css/j4e.webflow.css') }}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-    <script
-        type="text/javascript">WebFont.load({ google: { families: ["Exo:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"] } });</script>
 </head>
 
 <body>
@@ -26,9 +24,10 @@
         </div>
         <div class="headercontainer w-container">
             <h1 class="headertitle">Find The Best <br>Embedded System Jobs<br>In Europe</h1>
-            <form action="{{ url_for('searchjobs') }}" class="searchbar w-form">
-                <input id="title" type="search" class="searchbarinput w-input" maxlength="256" placeholder="Search…">
-                <button type="submit" onclick="searchJob()" class="button w-button">submit</button>
+            <form action="{{ url_for('index') }}" class="searchbar w-form">
+                <input id="search-text" type="text" name="search-text" class="searchbarinput w-input" maxlength="256"
+                    placeholder="Search…">
+                <button type="submit" class="button w-button">submit</button>
             </form>
         </div>
     </div>

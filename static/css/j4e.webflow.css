@@ -72,6 +72,7 @@
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+    background-color: transparent;
 }
 
 .button {
@@ -209,52 +210,6 @@
     align-items: stretch;
 }
 
-.search {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    margin-top: 0px;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-}
-
-.search-input {
-    margin-bottom: 0px;
-}
-
-.searchbar {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    margin-top: 50px;
-    margin-bottom: 0px;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: stretch;
-    -webkit-align-items: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-}
-
-.searchbarinput {
-    width: 60%;
-    height: 40px;
-    margin-right: 8px;
-    margin-bottom: 0px;
-    padding-right: 12px;
-    border-radius: 4px;
-}
-
 .jobcard_header {
     display: -webkit-box;
     display: -webkit-flex;
@@ -288,7 +243,11 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    min-height: 100px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     border: 0px solid #000;
     border-radius: 4px;
     box-shadow: 1px 1px 5px -3px #000;
@@ -478,7 +437,36 @@
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
+}
+
+.emailcross {
+    margin-left: 4px;
+}
+
+.searchbar {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+
+.searchbarinput {
+    width: 60%;
+    height: 40px;
     margin-right: 8px;
+    margin-bottom: 0px;
+    padding-right: 12px;
+    border-radius: 4px;
 }
 
 .jobboardreference {
@@ -498,26 +486,11 @@
     align-items: center;
 }
 
-.jobboardlogo {
-    padding-right: 20px;
-    padding-left: 20px;
-}
-
-.jobcard_skills {
-    display: block;
-    width: 70%;
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 auto;
-    -ms-flex: 0 auto;
-    flex: 0 auto;
-}
-
-.jobcard_date {
+.div-block {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    width: 30%;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
@@ -531,17 +504,27 @@
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 auto;
-    -ms-flex: 0 auto;
-    flex: 0 auto;
+    border-radius: 5px;
+    background-color: hsla(0, 0%, 100%, 0.61);
 }
 
-.emailcontainer {
+.jobboardlogo {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.text-block {
+    font-family: Exo, sans-serif;
+    font-weight: 700;
+}
+
+.jobboardlogos {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    margin-top: 14px;
+    margin-bottom: 14px;
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
@@ -550,14 +533,23 @@
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+}
+
+.jobcard_preview {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 100px;
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
 }
 
-.emailcross {
-    margin-left: 4px;
+.jobcard_expand {
+    display: none;
+    padding: 20px;
 }
 
 @media screen and (max-width: 991px) {
