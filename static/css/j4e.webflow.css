@@ -1,19 +1,16 @@
 .navbarname {
-    text-decoration: none;
-}
-
-.navbarname.w--current {
     color: #fff;
     font-size: 24px;
     font-weight: 700;
     text-shadow: 1px 1px 2px #000;
+    text-decoration: none;
 }
 
-.navbarname.pagename.w--current {
+.navbarname.pagename {
     margin-right: 18px;
     padding-right: 0px;
-    font-family: Exo, sans-serif;
-    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
     text-align: right;
     text-shadow: 1px 1px 1px #000;
 }
@@ -23,7 +20,9 @@
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    font-family: Exo, sans-serif;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
 }
 
 .navbarcontainer {
@@ -47,11 +46,10 @@
     background-image: url('../images/city.png');
     background-position: 0% 100%;
     background-size: auto;
-    background-repeat: repeat-x;
     background-attachment: scroll;
 }
 
-.pagename.w--current {
+.pagename {
     color: #fff;
     font-weight: 700;
 }
@@ -78,9 +76,9 @@
 .button {
     padding: 5px 8px;
     border-radius: 4px;
-    background-color: #e21079;
-    font-family: Exo, sans-serif;
-    font-size: 12px;
+    background-color: #e21041;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
     font-weight: 700;
     text-shadow: 0 0 3px #000;
 }
@@ -90,9 +88,10 @@
 }
 
 .headertitle {
-    font-family: Exo, sans-serif;
+    font-family: 'Nunito', sans-serif;
     color: #fff;
     text-align: center;
+    font-weight: 800;
     text-shadow: 1px 1px 2px #000;
 }
 
@@ -158,7 +157,7 @@
     -webkit-flex: 0 auto;
     -ms-flex: 0 auto;
     flex: 0 auto;
-    background-color: #d1d1d1;
+    background-color: #1c1c1c;
 }
 
 .utility-page-wrap {
@@ -288,7 +287,8 @@
     -webkit-align-self: flex-start;
     -ms-flex-item-align: start;
     align-self: flex-start;
-    font-family: Exo, sans-serif;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
     font-weight: 400;
     text-decoration: none;
 }
@@ -441,6 +441,7 @@
 
 .emailcross {
     margin-left: 4px;
+    filter: invert(100%);
 }
 
 .searchbar {
@@ -460,13 +461,19 @@
     align-items: stretch;
 }
 
+*:focus {
+    outline: none !important
+}
+
 .searchbarinput {
-    width: 60%;
-    height: 40px;
+    border-color: #ff000096;
+    border-width: 0px;
+    width: 50%;
+    height: 50px;
     margin-right: 8px;
     margin-bottom: 0px;
     padding-right: 12px;
-    border-radius: 4px;
+    border-radius: 22px;
 }
 
 .jobboardreference {
@@ -509,30 +516,15 @@
 }
 
 .jobboardlogo {
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+    filter: grayscale(100%) drop-shadow(1px 1px 1px gray);
 }
 
 .text-block {
-    font-family: Exo, sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-weight: 700;
-}
-
-.jobboardlogos {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    margin-top: 14px;
-    margin-bottom: 14px;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
+    font-size: 16px;
 }
 
 .jobcard_preview {
@@ -553,7 +545,7 @@
 }
 
 @media screen and (max-width: 991px) {
-    .navbarname.pagename.w--current {
+    .navbarname.pagename {
         margin-right: 18px;
     }
 
@@ -573,11 +565,11 @@
 }
 
 @media screen and (max-width: 767px) {
-    .navbarname.w--current {
+    .navbarname {
         font-size: 22px;
     }
 
-    .navbarname.pagename.w--current {
+    .navbarname.pagename {
         margin-right: 15px;
     }
 
@@ -609,7 +601,7 @@
 }
 
 @media screen and (max-width: 479px) {
-    .navbarname.pagename.w--current {
+    .navbarname.pagename {
         display: none;
         margin-right: 18px;
     }
