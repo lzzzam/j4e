@@ -4,16 +4,18 @@ var jobSeniority = "";
 
 (function () {
 
-    const newjobEl = document.getElementById("newjobs")
-    const loaderEl = document.getElementById("loader")
+    const joblist = document.getElementById("joblist")
+    const loader = document.getElementById("loader")
+    const noresult = document.getElementById("noresult")
+
     let stopScrolling = 0
 
     const hideLoader = () => {
-        loaderEl.style.display = "none";
+        loader.style.display = "none";
     };
 
     const showLoader = () => {
-        loaderEl.style.display = "block";
+        loader.style.display = "block";
     };
 
     // get the quotes from API
@@ -33,7 +35,7 @@ var jobSeniority = "";
     const showJobs = (jobs) => {
         const newEl = document.createElement('div');
         newEl.innerHTML = jobs
-        newjobEl.appendChild(newEl);
+        joblist.appendChild(newEl);
     };
 
     // load new jobs
@@ -41,7 +43,7 @@ var jobSeniority = "";
 
         showLoader();
 
-        // 0.1 second later
+        // 0.5 second later
         setTimeout(async () => {
             try {
                 // call the API to get new jobs
@@ -54,20 +56,22 @@ var jobSeniority = "";
                 hideLoader();
             }
 
-        }, 300);
+        }, 500);
     };
 
     window.addEventListener('scroll', () => {
-        const {
-            scrollHeight,
-            clientHeight
-        } = document.documentElement;
+        if (noresult == null) {
+            const {
+                scrollHeight,
+                clientHeight
+            } = document.documentElement;
 
-        let scrollTop = window.scrollY;
+            let scrollTop = window.scrollY;
 
-        if (stopScrolling == 0) {
-            if (scrollTop + clientHeight >= scrollHeight - 10) {
-                loadJobs();
+            if (stopScrolling == 0) {
+                if (scrollTop + clientHeight >= scrollHeight - 10) {
+                    loadJobs();
+                }
             }
         }
     }, {
