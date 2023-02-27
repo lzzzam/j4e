@@ -97,8 +97,9 @@
     text-shadow: 1px 1px 2px #000;
 }
 
-.form {
+.email-form {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -109,7 +110,7 @@
     flex: 1;
 }
 
-.no-result {
+.noresult {
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
     font-weight: 700;

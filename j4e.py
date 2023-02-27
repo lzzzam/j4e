@@ -67,11 +67,19 @@ def getJobs():
 @app.route('/form', methods=('GET', 'POST'))
 def form():
     resp = make_response('', 204)
+    # never show email box again
     resp.set_cookie(key='subscribed-to-newsletter', value = "1")
     return resp
 
-@app.route('/close_form')
+@app.route('/cookies', methods=('GET','POST'))
 def close_form():
-    resp = make_response('', 204)
-    resp.set_cookie(key='hidden-subscribe-box', value = "1", max_age=60)
+    # set cookies from json data
+    if request.method == 'POST':
+        data = request.json
+        if data.get('hidden_subscribe_box'):
+            resp = make_response('', 204)
+            resp.set_cookie(key='hidden-subscribe-box', value = "1", max_age=60)
+    else:
+        resp = make_response('', 400)
+        
     return resp
