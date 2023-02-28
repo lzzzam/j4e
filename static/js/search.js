@@ -3,6 +3,7 @@ function searchJob() {
     jobCity = document.getElementById("city")
     jobSeniority = document.getElementById("seniority")
 }
+
 $(document).ready(function () {
     // toogle description when click on job card
     $('#joblist').on('click', '.jobcard', function () {
@@ -28,4 +29,20 @@ $(document).ready(function () {
     $('.clickable').mouseout(function () {
         $(this).css('opacity', '1.0');
     });
+
+    $('#search-button').click(function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: '/',
+            type: 'GET',
+            data: jQuery.param({ field1: "hello", field2 : "hello2"}) ,
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (response) {
+                alert(response.status);
+            },
+            error: function () {
+                alert("error");
+            }
+        }); 
+      });
 });

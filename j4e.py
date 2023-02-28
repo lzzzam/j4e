@@ -30,7 +30,7 @@ def updateCookies(response):
     response.set_cookie(key='search-country', value = g.search_country, max_age=60)
     return response
 
-@app.route('/')
+@app.route('/', methods=('GET', 'POST'))
 def index():        
     g.search_text = request.args.get("search-text", "")
     g.search_country = request.args.get("search-country", "").lower()
@@ -86,3 +86,6 @@ def cookies():
         resp = make_response('', 400)
         
     return resp
+
+if __name__=="__main__":
+    app.run(debug=True)
