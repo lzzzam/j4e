@@ -1,9 +1,3 @@
-{% if context.noResult == True %}
-<div id="noresult" class="noresult">
-    <p>oh no... It seems that there are no result that satisfy this query 😞</p><br>
-    <p>please try with another search!!</p>
-</div>
-{% else %}
 {% for job in context.jobs %}
 <div class="jobcard">
     <div class="jobcard_preview">
@@ -35,4 +29,3 @@
     </div>
 </div>
 {% endfor %}
-{% endif %}

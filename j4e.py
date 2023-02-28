@@ -14,59 +14,45 @@ init_app(app)
 @app.before_request
 def readCookies():
     if (request.cookies.get('subscribed-to-newsletter') == "1") | \
-       (request.cookies.get('hidden-subscribe-box') == "1"):
+    (request.cookies.get('hidden-subscribe-box') == "1"):
         g.showEmailBox = False
     else:
         g.showEmailBox = True
-    
-    g.search_text = request.cookies.get('search-text', "")
-    g.page_offset = int(request.cookies.get('page-offset', "0"))
-    g.search_country = request.args.get("search-country", "")
 
 @app.after_request
 def updateCookies(response):
-    response.set_cookie(key='page-offset', value = str(g.page_offset), max_age=60)
-    response.set_cookie(key='search-text', value = g.search_text, max_age=60)
-    response.set_cookie(key='search-country', value = g.search_country, max_age=60)
     return response
 
 @app.route('/', methods=('GET', 'POST'))
-def index():        
-    g.search_text = request.args.get("search-text", "")
-    g.search_country = request.args.get("search-country", "").lower()
-    jobs = query_db(f"select * from jobs where  (title like '%{g.search_text}%' or \
-                                                company like '%{g.search_text}%' or \
-                                                description like '%{g.search_text}%') \
-                                            and (country like '%{g.search_country}%') \
-                    limit 10")
-    if len(jobs) > 0:
-        context = {"jobs" : jobs, "showEmailBox" : g.showEmailBox, "noResult": False}    
-        resp = make_response(render_template('index.html.j2', context=context))
-    else:
-        context = {"jobs" : jobs, "showEmailBox" : g.showEmailBox, "noResult": True}    
-        resp = make_response(render_template('index.html.j2', context=context))
-
+def index():
+    jobs = query_db(f"select * from jobs limit 10")     
+    context = {"jobs" : jobs, "showEmailBox" : g.showEmailBox}
+    resp = make_response(render_template('index.html.j2', context=context))
     return resp
 
 
-@app.route('/nextjobs')
-def getJobs():
-    g.page_offset = g.page_offset + 10 
-    jobs = query_db(f"select * from jobs where  (title like '%{g.search_text}%' or \
-                                                company like '%{g.search_text}%' or \
-                                                description like '%{g.search_text}%') \
-                                            and (country like '%{g.search_country}%') \
+@app.route('/search')
+def search():
+    g.search_text = request.args.get('text', "")
+    g.search_country = request.args.get("country", "")
+    g.page_offset = int(request.args.get('offset', "0"))
+
+    jobs = query_db(f"select * from jobs where  \
+                    (title like '%{g.search_text}%' OR \
+                    company like '%{g.search_text}%' OR \
+                    description like '%{g.search_text}%') AND\
+                    country like '%{g.search_country}%' \
                     limit 10 offset {g.page_offset}")
     
-    if len(jobs) != 0:
+    if len(jobs) > 0:
         context = {"jobs" : jobs}
-        resp = make_response(render_template('jobs.html.j2', context=context))
+        return make_response(render_template('jobs.html.j2', context=context))
+
+    if g.page_offset == 0:
+        return make_response(render_template('nojobs.html.j2'))
     else:
-        resp = make_response('', 204)
-        
-    return resp
-
-
+        return make_response('', 204)
+    
 @app.route('/form', methods=('GET', 'POST'))
 def form():
     resp = make_response('', 204)
