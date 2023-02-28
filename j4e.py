@@ -21,17 +21,19 @@ def readCookies():
     
     g.search_text = request.cookies.get('search-text', "")
     g.page_offset = int(request.cookies.get('page-offset', "0"))
+    g.search_country = request.args.get("search-country", "")
 
 @app.after_request
 def updateCookies(response):
     response.set_cookie(key='page-offset', value = str(g.page_offset), max_age=60)
     response.set_cookie(key='search-text', value = g.search_text, max_age=60)
+    response.set_cookie(key='search-country', value = g.search_country, max_age=60)
     return response
 
 @app.route('/')
 def index():        
     g.search_text = request.args.get("search-text", "")
-    g.search_country = request.args.get("search-country", "")
+    g.search_country = request.args.get("search-country", "").lower()
     jobs = query_db(f"select * from jobs where  (title like '%{g.search_text}%' or \
                                                 company like '%{g.search_text}%' or \
                                                 description like '%{g.search_text}%') \
@@ -50,9 +52,10 @@ def index():
 @app.route('/nextjobs')
 def getJobs():
     g.page_offset = g.page_offset + 10 
-    jobs = query_db(f"select * from jobs where  title like '%{g.search_text}%' or \
+    jobs = query_db(f"select * from jobs where  (title like '%{g.search_text}%' or \
                                                 company like '%{g.search_text}%' or \
-                                                description like '%{g.search_text}%' \
+                                                description like '%{g.search_text}%') \
+                                            and (country like '%{g.search_country}%') \
                     limit 10 offset {g.page_offset}")
     
     if len(jobs) != 0:
@@ -72,7 +75,7 @@ def form():
     return resp
 
 @app.route('/cookies', methods=('GET','POST'))
-def close_form():
+def cookies():
     # set cookies from json data
     if request.method == 'POST':
         data = request.json
