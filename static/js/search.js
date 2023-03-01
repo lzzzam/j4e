@@ -3,6 +3,8 @@ $(document).ready(function () {
     let offset = 0;
     let text = "";
     let country = "";
+    let didScroll = false;
+    let enableScroll = true;
 
     // toogle description when click on job card
     $('#joblist').on('click', '.jobcard', function () {
@@ -29,12 +31,14 @@ $(document).ready(function () {
         $(this).css('opacity', '1.0');
     });
 
+    // query database with new text/country
     $('#search-button').click(function (event) {
         event.preventDefault();
 
         offset = 0;
         text = $('#text').val();
         country = $('#country').val();
+        enableScroll = true;
 
         $.ajax({
             url: '/search',
@@ -47,22 +51,8 @@ $(document).ready(function () {
         });
     });
 
-
-    const joblist = document.getElementById("joblist")
-    const loader = document.getElementById("loader")
-    const noresult = document.getElementById("noresult")
-
-    let stopScrolling = 0
-
-    const hideLoader = () => {
-        loader.style.display = "none";
-    };
-
-    const showLoader = () => {
-        loader.style.display = "block";
-    };
-
-    const getJobs = async () => {
+    // make GET request to receive new job cards as HTML
+    const getNewJobs = async () => {
         offset = offset + 10;
         $.ajax({
             url: '/search',
@@ -70,15 +60,13 @@ $(document).ready(function () {
             data: jQuery.param({ text: text, country: country, offset: offset.toString() }),
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             dataType: 'text/html',
-            success: function (response) {
-                $("#joblist").append(response.responseText);
-            },
             statusCode: {
                 404: function () {
                     alert("page not found");
                 },
                 204: function () {
-                    stopScrolling = 1;
+                    // no more job available --> stop request new jobs
+                    enableScroll = false;
                 },
                 200: function (response) {
                     $("#joblist").append(response.responseText);
@@ -87,41 +75,46 @@ $(document).ready(function () {
         });
     }
 
-    // load new jobs
+    // show loading symbol for 0.5 secs and request new job cards
     const loadJobs = async () => {
-
-        showLoader();
-
-        // 0.5 second later
+        $('#loader').show();
         setTimeout(async () => {
             try {
-                getJobs();
+                getNewJobs();
             } catch (error) {
                 console.log(error.message);
             }
             finally {
-                hideLoader();
+                $('#loader').hide();
             }
-
         }, 500);
     };
 
-    window.addEventListener('scroll', () => {
-        if (noresult == null) {
-            const {
-                scrollHeight,
-                clientHeight
-            } = document.documentElement;
+    $(window).scroll(function () {
+        didScroll = true;
+    });
 
-            let scrollTop = window.scrollY;
+    // set a timer to check if a "scroll" event happened
+    setInterval(function () {
+        if (didScroll) {
+            didScroll = false;
 
-            if (stopScrolling == 0) {
-                if (scrollTop + clientHeight >= scrollHeight - 5) {
-                    loadJobs();
+            // request new job only when special 
+            // <div id="noresult"...> is NOT present
+            if (!$('#noresult').length) {
+                const {
+                    scrollHeight,
+                    clientHeight
+                } = document.documentElement;
+
+                let scrollTop = window.scrollY;
+
+                if (enableScroll == true) {
+                    if (scrollTop + clientHeight >= scrollHeight - 10) {
+                        loadJobs();
+                    }
                 }
             }
         }
-    }, {
-        passive: true
-    });
+    }, 250);
 });

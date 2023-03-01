@@ -51,7 +51,7 @@ def search():
     if g.page_offset == 0:
         return make_response(render_template('nojobs.html.j2'))
     else:
-        return make_response('', 204)
+        return '', 204
     
 @app.route('/form', methods=('GET', 'POST'))
 def form():
@@ -74,4 +74,4 @@ def cookies():
     return resp
 
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
