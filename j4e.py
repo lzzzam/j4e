@@ -42,7 +42,7 @@ def search():
                     company like '%{g.search_text}%' OR \
                     description like '%{g.search_text}%') AND\
                     country like '%{g.search_country}%' \
-                    limit 10 offset {g.page_offset}")
+                    limit 20 offset {g.page_offset}")
     
     if len(jobs) > 0:
         context = {"jobs" : jobs}

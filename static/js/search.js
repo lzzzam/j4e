@@ -53,7 +53,7 @@ $(document).ready(function () {
 
     // make GET request to receive new job cards as HTML
     const getNewJobs = async () => {
-        offset = offset + 10;
+        offset = offset + 20;
         $.ajax({
             url: '/search',
             type: 'GET',
