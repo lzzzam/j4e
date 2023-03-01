@@ -1,3 +1,8 @@
+{% if context.search_num is defined %}
+<div class="filters">
+    <p class="tag">Result: {{ context.search_num }}</p>
+</div>
+{% endif %}
 {% for job in context.jobs %}
 <div class="jobcard">
     <div class="jobcard_preview">
@@ -14,7 +19,7 @@
                 <img src="{{ url_for('static', filename='images/pin.svg') }}" loading="lazy" width="20" height="20"
                     alt="" class="mapicon">
                 <div class="jobcardtext jobcardplace">{{ job.place }}</div>
-                <div class="jobcardtext">🇮🇹</div>
+                <div class="jobcardtext">{{ context.flags[job.country] }}</div>
             </div>
         </div>
         <div class="jobcard_footer">
