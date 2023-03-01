@@ -1,6 +1,21 @@
 {% if context.search_num is defined %}
 <div class="filters">
-    <p class="tag">Result: {{ context.search_num }}</p>
+    <div class="filters-select">
+        <select id="job-filters" class="tag w-input">
+            <optgroup label="Seniority">
+                <option value="junior">Junior </option>
+                <option value="senior">Senior </option>
+            </optgroup>
+            <optgroup label="Skills">
+                <option value="c">C</option>
+                <option value="c++">C++</option>
+                <option value="python">Python</option>
+            </optgroup>
+        </select>
+    </div>
+    <div class="filters-result">
+        <p class="tag">Result: {{ context.search_num }}</p>
+    </div>
 </div>
 {% endif %}
 {% for job in context.jobs %}
@@ -30,7 +45,10 @@
         </div>
     </div>
     <div class="jobcard_expand">
-        <div class="jobcardtext">{{ job.description }}</div>
+        <div class="jobcardtext">
+            {{ job.description }}
+            <div class="button apply">APPLY</div>
+        </div>
     </div>
 </div>
 {% endfor %}
