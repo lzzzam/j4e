@@ -1,9 +1,23 @@
-{% if context.noResult == True %}
-<div id="noresult" class="noresult">
-    <p>oh no... It seems that there are no result that satisfy this query 😞</p><br>
-    <p>please try with another search!!</p>
+{% if context.search_num is defined %}
+<div class="filters">
+    <div class="filters-select">
+        <select id="job-filters" class="tag w-input">
+            <optgroup label="Seniority">
+                <option value="junior">Junior </option>
+                <option value="senior">Senior </option>
+            </optgroup>
+            <optgroup label="Skills">
+                <option value="c">C</option>
+                <option value="c++">C++</option>
+                <option value="python">Python</option>
+            </optgroup>
+        </select>
+    </div>
+    <div class="filters-result">
+        <p class="tag">Result: {{ context.search_num }}</p>
+    </div>
 </div>
-{% else %}
+{% endif %}
 {% for job in context.jobs %}
 <div class="jobcard">
     <div class="jobcard_preview">
@@ -20,7 +34,7 @@
                 <img src="{{ url_for('static', filename='images/pin.svg') }}" loading="lazy" width="20" height="20"
                     alt="" class="mapicon">
                 <div class="jobcardtext jobcardplace">{{ job.place }}</div>
-                <div class="jobcardtext">🇮🇹</div>
+                <div class="jobcardtext">{{ context.flags[job.country] }}</div>
             </div>
         </div>
         <div class="jobcard_footer">
@@ -31,8 +45,10 @@
         </div>
     </div>
     <div class="jobcard_expand">
-        <div class="jobcardtext">{{ job.description }}</div>
+        <div class="jobcardtext">
+            {{ job.description }}
+            <div class="button apply">APPLY</div>
+        </div>
     </div>
 </div>
 {% endfor %}
-{% endif %}
