@@ -11,15 +11,15 @@ $(document).ready(function () {
         $(this).children(".jobcard_expand").slideToggle('fast');
     });
 
-    // highlight job card when mouse is over
-    $('#joblist').on('mouseover', '.jobcard', function () {
-        $(this).css('background-color', '#f3f3f3');
-    });
+    // // highlight job card when mouse is over
+    // $('#joblist').on('mouseover', '.jobcard', function () {
+    //     $(this).css('background-color', '#f3f3f3');
+    // });
 
-    // restore job card color when mouse is out
-    $('#joblist').on('mouseout', '.jobcard', function () {
-        $(this).css('background-color', 'transparent');
-    });
+    // // restore job card color when mouse is out
+    // $('#joblist').on('mouseout', '.jobcard', function () {
+    //     $(this).css('background-color', 'transparent');
+    // });
 
     // highlight job board logo when mouse is over
     $('.clickable').mouseover(function () {
