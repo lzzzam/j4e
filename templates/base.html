@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>⚡Jobs4Embedded</title>
+    <title>Jobs4Embedded ⚡</title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,9 +20,9 @@
 <body class="body">
     <div class="headersection wf-section">
         <div class="navbarcontainer w-container">
-            <a href="/" aria-current="page" class="navbarname brandname underline-01 clickable">>>Jobs4Embedded</a>
+            <a href="/" aria-current="page" class="navbarname brandname clickable">>>Jobs4Embedded</a>
             <a href="" aria-current="page" class="navbarname pagename clickable">About</a>
-            <a href="#" class="button">POST A JOB</a>
+            <a href="{{ url_for('post') }}" class="button">POST A JOB</a>
         </div>
         <div class="headercontainer w-container">
             <h1 class="headertitle clickable">
@@ -87,6 +87,30 @@
 
     <div id="loader" class="loader">
         <img src="{{ url_for('static', filename='images/spinner.gif') }}" loading="lazy" width="50" height="50">
+    </div>
+
+    <div class="footer">
+        <div class="container w-container">
+            <div class="footer-elem">
+                <div class="footer-elem footer-text">
+                    <p>Empowering the Embedded System job market by connecting skilled professionals with outstanding
+                        career opportunities worldwide</p>
+                </div>
+                <div class="footer-elem">
+                    <img src="{{ url_for('static', filename='images/facebook_icon.png') }}" loading="lazy" width="30"
+                        class="clickable">
+                    <img src="{{ url_for('static', filename='images/linkedin_icon.png') }}" loading="lazy" width="30"
+                        class="clickable">
+                    <img src="{{ url_for('static', filename='images/twitter_icon.png') }}" loading="lazy" width="30"
+                        class="clickable">
+                    <img src="{{ url_for('static', filename='images/reddit_icon.png') }}" loading="lazy" width="30"
+                        class="clickable">
+                </div>
+                <div class="footer-elem">
+                    <p>Copyright 2023 Jobs4Embedded. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     {% if context.showEmailBox == True %}

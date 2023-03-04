@@ -1,0 +1,128 @@
+<!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
+<!--  Last Published: Mon Feb 06 2023 22:00:38 GMT+0000 (Coordinated Universal Time)  -->
+<html>
+
+<head>
+    <title>Jobs4Embedded ⚡</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700;800;900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/normalize.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/webflow.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/j4e.webflow.css') }}" rel="stylesheet" type="text/css">
+</head>
+
+<body class="body">
+    <div class="headersection wf-section">
+        <div class="navbarcontainer w-container">
+            <a href="/" aria-current="page" class="navbarname brandname clickable">>>Jobs4Embedded</a>
+            <a href="" aria-current="page" class="navbarname pagename clickable">About</a>
+            <a href="{{ url_for('post') }}" class="button">POST A JOB</a>
+        </div>
+        <div class="container w-container">
+            <div class="postsection">
+                <h1 class="headertitle clickable">
+                    Post a Job and get promoted<br>
+                    all around the world 🌍
+                </h1>
+                <div class="grid-container card">
+                    <div class="postlabel">
+                        <p>Job Title</p>
+                        <input id="title" type="text" name="title" class="postinput w-input">
+                    </div>
+                    <div class="postlabel">
+                        <p>Company</p>
+                        <input id="title" type="text" name="title" class="postinput w-input">
+                    </div>
+                    <div class="postlabel">
+                        <p>Seniority</p>
+                        <select id="seniority" name="seniority" class="postinput w-input">
+                            <option value="europe">Entry-level</option>
+                            <option value="remote">Mid-level</option>
+                            <option value="remote">Senior-level</option>
+                        </select>
+                    </div>
+                    <div class="postlabel">
+                        <p>Country</p>
+                        <select id="country" name="country" class="postinput w-input">
+                            <optgroup label="Region">
+                                <option value="europe">Europe 🇪🇺</option>
+                                <option value="remote">Remote 🌍</option>
+                            </optgroup>
+                            <optgroup label="Country">
+                                <option value="austria">Austria 🇦🇹</option>
+                                <option value="belgium">Belgium 🇧🇪</option>
+                                <option value="czechia">Czechia 🇨🇿</option>
+                                <option value="denmark">Denmark 🇩🇰</option>
+                                <option value="france">France 🇫🇷</option>
+                                <option value="finland">Finland 🇫🇮</option>
+                                <option value="germany">Germany 🇩🇪</option>
+                                <option value="greece">Greece 🇬🇷</option>
+                                <option value="hungary">Hungary 🇭🇺</option>
+                                <option value="ireland">Ireland 🇮🇪</option>
+                                <option value="italy">Italy 🇮🇹</option>
+                                <option value="luxembourg">Luxembourg 🇱🇺</option>
+                                <option value="norway">Norway 🇳🇴</option>
+                                <option value="netherlands">Netherlands 🇳🇱</option>
+                                <option value="poland">Poland 🇵🇱</option>
+                                <option value="portugal">Portugal 🇵🇹</option>
+                                <option value="romania">Romania 🇷🇴</option>
+                                <option value="spain">Spain 🇪🇸</option>
+                                <option value="sweden">Sweden 🇸🇪</option>
+                                <option value="ukraine">Ukraine 🇺🇦</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="postlabel postdescription">
+                        <p>Application URL</p>
+                        <input id="title" type="text" name="title" class="postinput w-input"
+                            placeholder="link or email to apply for your position">
+                    </div>
+                    <div class="postlabel postdescription">
+                        <p>Job Description</p>
+                        <textarea id="post-description" name="description" rows="6" cols="1"
+                            class="postinput post-text w-input" placeholder="..."></textarea>
+                    </div>
+                    <a href="#" class="postdescription button">Submit Job For Approval</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="container w-container">
+                <div class="footer-elem">
+                    <div class="footer-elem footer-text">
+                        <p>Empowering the Embedded System job market by connecting skilled professionals with
+                            outstanding career opportunities worldwide</p>
+                    </div>
+                    <div class="footer-elem">
+                        <img src="{{ url_for('static', filename='images/facebook_icon.png') }}" loading="lazy"
+                            width="30" class="clickable">
+                        <img src="{{ url_for('static', filename='images/linkedin_icon.png') }}" loading="lazy"
+                            width="30" class="clickable">
+                        <img src="{{ url_for('static', filename='images/twitter_icon.png') }}" loading="lazy" width="30"
+                            class="clickable">
+                        <img src="{{ url_for('static', filename='images/reddit_icon.png') }}" loading="lazy" width="30"
+                            class="clickable">
+                    </div>
+                    <div class="footer-elem">
+                        <p>Copyright 2023 Jobs4Embedded. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+        <script src="{{ url_for('static', filename='js/webflow.js') }}" type="text/javascript"></script>
+        <script src="{{ url_for('static', filename='js/index.js') }}" type="text/javascript"></script>
+        <script>
+        </script>
+</body>
+
+</html>

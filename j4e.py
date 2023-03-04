@@ -84,6 +84,11 @@ def search():
         return make_response(render_template('nojobs.html.j2'))
     else:
         return '', 204
+
+@app.route('/post', methods=('GET', 'POST'))
+def post():
+    resp = make_response(render_template('post.html.j2'), 200)
+    return resp
     
 @app.route('/form', methods=('GET', 'POST'))
 def form():

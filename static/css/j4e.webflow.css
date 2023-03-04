@@ -9,6 +9,76 @@
     --border-radius: 8px;
 }
 
+.postsection {
+    width: 690px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--brandname-color);
+    height: 180px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 40px;
+    font-size: 16px;
+    color: #000;
+    text-align: center;
+}
+
+.footer-elem {
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.footer-text {
+    width: 500px;
+}
+
+.card {
+    border: 0px solid #000;
+    border-radius: var(--border-radius);
+    box-shadow: 1px 1px 6px -2px #000;
+    background-color: var(--jobcard-color);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 20px;
+    column-gap: 40px;
+    padding: 40px;
+    margin-top: 20px;
+}
+
+.postlabel {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.postinput {
+    border-width: 1px;
+    border-color: #b4b4b4;
+    height: 50px;
+    margin-bottom: 0px;
+    border-radius: var(--border-radius);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.postdescription {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
 .filters {
     display: flex;
     flex-direction: row;
@@ -63,7 +133,7 @@
 
 .navbarname.brandname {
     flex: 1;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 900;
     color: var(--brandname-color);
 }
@@ -92,6 +162,14 @@
     align-items: center;
     align-content: stretch;
     background-color: transparent;
+}
+
+.clickable {
+    opacity: 1.0;
+}
+
+.clickable:hover {
+    opacity: 0.6;
 }
 
 .button {
@@ -142,6 +220,7 @@
     color: var(--text-color);
     text-align: center;
     font-weight: 800;
+    font-size: 38px;
 }
 
 .email-form {
@@ -185,6 +264,12 @@
     align-items: center;
     flex: auto;
     background-color: #1c1c1c;
+}
+
+.jobboard {
+    max-height: 500px;
+    padding-bottom: 30px;
+    overflow: auto;
 }
 
 .jobcard_header {
@@ -433,6 +518,10 @@
         margin-right: 15px;
     }
 
+    .postsection {
+        width: 90%;
+    }
+
     .searchbar {
         width: 90%;
     }
@@ -465,10 +554,39 @@
     }
 }
 
+@media screen and (max-width: 665px) {
+    .grid-container {
+        grid-template-columns: auto;
+    }
+
+    .postdescription {
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+
+    .container {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .footer-text {
+        width: 460px;
+    }
+}
+
 @media screen and (max-width: 479px) {
     .navbarname.pagename {
         display: none;
         margin-right: 18px;
+    }
+
+    .grid-container {
+        grid-template-columns: auto;
+        padding: 20px;
+    }
+
+    .postsection {
+        width: 100%;
     }
 
     .jobcard_footer {
@@ -502,4 +620,27 @@
         align-items: flex-start;
         font-size: 10px;
     }
+
+    .footer {
+        margin-top: 30px;
+        font-size: 14px;
+    }
+
+    .footer-text {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 362px) {
+    .navbarname.brandname {
+        flex: 1;
+        font-size: 22px;
+        font-weight: 900;
+    }
+
+    .button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
 }
