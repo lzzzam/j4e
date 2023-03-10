@@ -97,7 +97,7 @@
 
 .emailfield:hover {
     border-width: 2px;
-    border-color: #F55050;
+    border-color: var(--button-color);
 }
 
 .body {

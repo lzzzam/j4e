@@ -7,3 +7,7 @@ def startApp(c):
 @task
 def gitLog(c):
     c.run("git log --all --decorate --oneline --graph")
+    
+@task
+def shutdown(c):
+    c.run("sudo shutdown -r now")
