@@ -31,6 +31,16 @@ $(document).ready(function () {
         $(this).css('opacity', '1.0');
     });
 
+    // highlight job board logo when mouse is over
+    $('.underline').mouseover(function () {
+        $(this).css('text-decoration', 'underline');
+    });
+
+    // restore job board logo when mouse is out
+    $('.underline').mouseout(function () {
+        $(this).css('text-decoration', 'none');
+    });
+
     // query database with new text/country
     $('#search-button').click(function (event) {
         event.preventDefault();
@@ -94,27 +104,27 @@ $(document).ready(function () {
         didScroll = true;
     });
 
-    // set a timer to check if a "scroll" event happened
-    setInterval(function () {
-        if (didScroll) {
-            didScroll = false;
+    // // set a timer to check if a "scroll" event happened
+    // setInterval(function () {
+    //     if (didScroll) {
+    //         didScroll = false;
 
-            // request new job only when special 
-            // <div id="noresult"...> is NOT present
-            if (!$('#noresult').length) {
-                const {
-                    scrollHeight,
-                    clientHeight
-                } = document.documentElement;
+    //         // request new job only when special 
+    //         // <div id="noresult"...> is NOT present
+    //         if (!$('#noresult').length) {
+    //             const {
+    //                 scrollHeight,
+    //                 clientHeight
+    //             } = document.documentElement;
 
-                let scrollTop = window.scrollY;
+    //             let scrollTop = window.scrollY;
 
-                if (enableScroll == true) {
-                    if (scrollTop + clientHeight >= scrollHeight - 10) {
-                        loadJobs();
-                    }
-                }
-            }
-        }
-    }, 250);
+    //             if (enableScroll == true) {
+    //                 if (scrollTop + clientHeight >= scrollHeight - 10) {
+    //                     loadJobs();
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }, 250);
 });
