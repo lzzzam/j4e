@@ -106,16 +106,25 @@
     background-size: cover;
 }
 
+.domain {
+    font-size: auto;
+}
+
+.container {
+    width: 945px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .section {
-    margin-top: 100px;
     padding: 30px;
     width: 700px;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: 1px 1px 6px 1px #000;
-    border-radius: var(--border-radius);
+    margin-top: 20px;
     background-color: #FFF;
-    opacity: 0.99;
+    box-shadow: 1px 1px 6px 1px #000;
+    opacity: 0.96;
 }
 
 .section:hover {
@@ -180,8 +189,29 @@
     }
 }
 
-@media screen and (max-width: 991px) {}
 
-@media screen and (max-width: 767px) {}
+@media screen and (max-width: 940px) {
+    .container {
+        width: 100%;
+    }
+}
 
-@media screen and (max-width: 479px) {}
+@media screen and (max-width: 740px) {
+
+    .domain {
+        font-size: 30px;
+    }
+
+    .email-form {
+        width: 90%;
+    }
+
+    .section {
+        width: 100%;
+        min-height: 100vh;
+        margin-top: 0px;
+        padding: 20px;
+        opacity: 0.90;
+        border-radius: 0px;
+    }
+}
